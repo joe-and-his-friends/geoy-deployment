@@ -1,5 +1,5 @@
 services:
-  graph:
+  services:
     image: binartist/geoy-service:arm32v7
     logging:
       options:
