@@ -1,0 +1,51 @@
+services:
+  graph:
+    image: binartist/geoy-service:arm32v7
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "3"
+    env_file:
+      - ./.env
+    ports:
+      - 8000:8000
+    restart: on-failure
+
+  mongo:
+    image: webhippie/mongodb:latest-arm32v7
+    restart: always
+    ports:
+      - 27018:27017
+    env_file:
+      - .env
+    volumes:
+      - ./data/mongodb:/data/db
+
+  webapp:
+    image: binartist/geoy-webapp
+    container_name: webapp
+    volumes:
+      - ./geoy_webapp:/var/www
+
+  webserver:
+    image: arm32v7/nginx:alpine
+    container_name: webserver
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./config:/etc/nginx/conf.d
+      - ./serp_webapp:/var/serp_webapp
+
+  redis:
+    image: arm32v7/redis:alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+      - SLAVE_READ_ONLY=no
+    container_name: redis
+    restart: on-failure
+
+networks:
+  default:
+    name: geoy-network
