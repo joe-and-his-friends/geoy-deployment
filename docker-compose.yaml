@@ -1,6 +1,6 @@
 services:
   services:
-    image: binartist/geoy-service:arm32v7
+    image: binartist/geoy-services:arm32v7
     logging:
       options:
         max-size: "5m"
