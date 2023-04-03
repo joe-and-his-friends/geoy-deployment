@@ -11,6 +11,15 @@ services:
       - 8000:8000
     restart: on-failure
 
+  messaging:
+    image: binartist/messaging:arm32v7
+    container_name: messaging
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "3"    
+    restart: on-failure
+
   mongo:
     image: webhippie/mongodb:latest-arm32v7
     restart: always
