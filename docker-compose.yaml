@@ -44,7 +44,7 @@ services:
       - 80:80
     volumes:
       - ./config:/etc/nginx/conf.d
-      - ./serp_webapp:/var/serp_webapp
+      - ./geoy_webapp:/var/geoy_webapp
 
   redis:
     image: arm32v7/redis:alpine
