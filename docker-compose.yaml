@@ -49,7 +49,7 @@ services:
       - ./geoy_webapp:/var/geoy_webapp
 
   redis:
-    image: arm32v7/redis:alpine
+    image: arm32v7/redis:7-bullseye
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
