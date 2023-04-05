@@ -33,7 +33,7 @@ services:
       - ./data/mongodb:/data/db
 
   webapp:
-    image: binartist/geoy-webapp
+    image: binartist/geoy-webapp:arm32v7
     container_name: webapp
     volumes:
       - ./geoy_webapp:/var/www
