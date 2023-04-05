@@ -17,7 +17,9 @@ services:
     logging:
       options:
         max-size: "5m"
-        max-file: "3"    
+        max-file: "3" 
+    environment:
+      - SERVER_PORT=:8002
     restart: on-failure
 
   mongo:
