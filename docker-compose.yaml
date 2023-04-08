@@ -1,6 +1,7 @@
 services:
-  services:
+  geoy-services:
     image: binartist/geoy-services:arm32v7
+    container_name: geoy_services
     logging:
       options:
         max-size: "5m"
@@ -10,6 +11,12 @@ services:
     ports:
       - 8000:8000
     restart: on-failure
+
+  geoy-webapp:
+    image: asing1elife/geoy_webapp:arm32v7
+    container_name: geoy_webapp
+    volumes:
+      - ./geoy_webapp:/var/www
 
   messaging:
     image: binartist/messaging:arm32v7
@@ -26,6 +33,7 @@ services:
 
   mongo:
     image: apcheamitru/arm32v7-mongo:3.2
+    container_name: mongo
     restart: always
     ports:
       - 27018:27017
@@ -33,12 +41,6 @@ services:
       - .env
     volumes:
       - ./data/mongodb:/data/db
-
-  webapp:
-    image: asing1elife/geoy_webapp:arm32v7
-    container_name: webapp
-    volumes:
-      - ./geoy_webapp:/var/www
 
   webserver:
     image: arm32v7/nginx:alpine
@@ -52,11 +54,11 @@ services:
 
   redis:
     image: arm32v7/redis:7-bullseye
+    container_name: redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
       - SLAVE_READ_ONLY=no
-    container_name: redis
     restart: on-failure
 
 networks:
