@@ -8,8 +8,6 @@ services:
         max-file: "3"
     env_file:
       - ./.env
-    ports:
-      - 8000:8000
     restart: on-failure
 
   geoy-webapp:
@@ -35,8 +33,6 @@ services:
     image: apcheamitru/arm32v7-mongo:3.2
     container_name: mongo
     restart: always
-    ports:
-      - 27018:27017
     env_file:
       - .env
     volumes:
@@ -47,7 +43,7 @@ services:
     container_name: webserver
     restart: always
     ports:
-      - 80:80
+      - 5374:80
     volumes:
       - ./config:/etc/nginx/conf.d
       - ./geoy_webapp:/var/geoy_webapp
