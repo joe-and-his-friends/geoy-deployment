@@ -16,19 +16,6 @@ services:
     volumes:
       - ./geoy_webapp:/var/www
 
-  messaging:
-    image: binartist/messaging:arm32v7
-    container_name: messaging
-    logging:
-      options:
-        max-size: "5m"
-        max-file: "3" 
-    environment:
-      - SERVER_PORT=:8002
-    env_file:
-      - ./.env
-    restart: on-failure
-
   mongo:
     image: apcheamitru/arm32v7-mongo:3.2
     container_name: mongo
@@ -47,15 +34,6 @@ services:
     volumes:
       - ./config:/etc/nginx/conf.d
       - ./geoy_webapp:/var/geoy_webapp
-
-  redis:
-    image: arm32v7/redis:7-bullseye
-    container_name: redis
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
-      - SLAVE_READ_ONLY=no
-    restart: on-failure
 
 networks:
   default:
